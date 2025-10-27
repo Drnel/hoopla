@@ -18,4 +18,8 @@ def process_text(text: str):
     translator = str.maketrans('','', string.punctuation)
     text = text.translate(translator)
     tokens = text.split()
-    return tokens
+    with open("data/stopwords.txt", "r") as file:
+        content = file.read()
+        stop_words = content.splitlines()
+    filtered = [word for word in tokens if word not in stop_words]
+    return filtered

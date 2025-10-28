@@ -1,5 +1,6 @@
 import json
 import string
+from nltk.stem import PorterStemmer
 
 def file_search(query): 
     with open("data/movies.json", "r") as file:
@@ -22,4 +23,6 @@ def process_text(text: str):
         content = file.read()
         stop_words = content.splitlines()
     filtered = [word for word in tokens if word not in stop_words]
-    return filtered
+    stemmer = PorterStemmer()
+    stemmed = [stemmer.stem(word) for word in filtered]
+    return stemmed
